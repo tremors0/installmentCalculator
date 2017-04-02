@@ -1,5 +1,6 @@
 /**
  * This file includes all javasript a jquery functions
+ * https://www.algoritmy.net/article/123/Anuita - vypocet anuity
  */
 
 /**
