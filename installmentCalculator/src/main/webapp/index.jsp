@@ -38,7 +38,7 @@
 	    	<div class = inputTextWrapper>
 	    		<input type = "text" class = "inputText instalmentTimeInput" name = "instalmentTime">
 	    		<span class = "bold moveDown"> měsíců </span>
-	    		<span id = monthsToYears> XXX let </span>
+	    		<p id = monthsToYears><p>
 	    	</div>
 	    	
 	    	
