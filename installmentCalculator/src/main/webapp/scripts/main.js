@@ -19,8 +19,6 @@ $(function() {
    	    	// set default design for input text
    	    	var amount = document.getElementsByClassName("amountOfMoneyInput");
    	    	amount[0].style.border="1px solid #c5c5c5";
-   	    },
-   	    stop: function (event, ui) {
    	    	createRequest();
    	    }
 	});
@@ -44,10 +42,8 @@ $(function() {
 			var amount = document.getElementsByClassName("instalmentTimeInput");
    	    	amount[0].style.border="1px solid #c5c5c5";
    	    	monthsToYearAndMonths(ui.value);
-		},
-		stop: function (event, ui) {
    	    	createRequest();
-   	    }
+		}
 	});
 });
 
@@ -128,6 +124,9 @@ $(function() {
 });
       
 
+/**
+ * Send response when radio button 1 is clicked
+ */
 $(function(){
 	$("#radioInput1").click(function(){
 		if ($(this).is(':checked')) {
@@ -137,6 +136,9 @@ $(function(){
 });
 
 
+/**
+ * Send response when radio button 2 is clicked
+ */
 $(function(){
 	$("#radioInput2").click(function(){
 		if ($(this).is(':checked')) {
@@ -146,6 +148,10 @@ $(function(){
 });
 
 
+/**
+ * Creates GET request for a server
+ * @returns
+ */
 function createRequest () {
 	var uriString = "/installmentCalculator/webapi/";
 	
@@ -176,6 +182,11 @@ function createRequest () {
 }
 
 
+/**
+ * Send request on the server
+ * @param uriString		URI
+ * @returns
+ */
 function sendRequest(uriString) {
 	$.getJSON(uriString, function(jd) {
 		$("#monthPayment").text(formatNumber(jd.monthInstallment) + " Kč");
@@ -185,6 +196,11 @@ function sendRequest(uriString) {
 }
 
 
+/**
+ * deletes white spaces from string
+ * @param originValue		original string
+ * @returns					edited string
+ */
 function deleteWhitespaces(originValue) {
 	return originValue.replace(/\s+/g, '');
 }
@@ -215,28 +231,21 @@ function formatNumber (number) {
 function monthsToYearAndMonths(months) {
 	var years = (months / 12) >> 0;
 	var monthsLeft = months % 12;
-	var yearExtensions = ["let", "rok", "roky", "roky", "roky", "let"];
-	
-	var indexInYearExtensions = years;
-	if (indexInYearExtensions > 5) {
-		indexInYearExtensions = 5;
-	}
-	
+	var yearExtensions = ["let", "rok", "roky", "roky", "roky", "let", "let", "let", "let"];
+		
 	var result = "";
 	
 	//if it is more than 12 months
 	if (years != 0) {
-		result += years + " " + yearExtensions[indexInYearExtensions];
+		result += years + " " + yearExtensions[years];
 	}
 	
-	var monthExtensions = ["měsíců", "měsíc", "měsíce", "měsíce", "měsíce", "měsíců"];
-	var indexInMonthExtensions = monthsLeft;
-	if (indexInMonthExtensions > 5) {
-		indexInMonthExtensions = 5;
-	}
+	var monthExtensions = ["měsíců", "měsíc", "měsíce", "měsíce", "měsíce", "měsíců", "měsíců",
+						   "měsíců", "měsíců", "měsíců", "měsíců", "měsíců"];
+
 	
 	if (monthsLeft != 0) {
-		result += " " + monthsLeft + " " + monthExtensions[indexInMonthExtensions];
+		result += " " + monthsLeft + " " + monthExtensions[monthsLeft];
 	}
 	
 	document.getElementById('monthsToYears').innerHTML = result;

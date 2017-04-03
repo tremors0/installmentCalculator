@@ -39,14 +39,14 @@ h3 {
 	cursor: pointer !important;
 }
 
-
+/** wrapper for a whole content*/
 .wrapper {
 	max-width: 1150px;;
 	margin: 0 auto;
 	padding: 0;	
 }
 
-
+/**general content settings - for both sides*/
 .content {
 	display: inline-block;
 	min-width: 350px;
@@ -110,7 +110,7 @@ h3 {
 	float: right;
 }
 
-
+/** Radio button design */
 label {
   display: inline-block;
   cursor: pointer;
