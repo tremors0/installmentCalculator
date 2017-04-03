@@ -17,6 +17,12 @@ public class Output {
 	private String totalSumOfMoney;
 	private double RSPN;
 	
+	/**JAX-RS need empty constructor*/
+	public Output() {
+		
+	}
+	
+	
 	/** Constructor */
 	public Output(double monthInstallment, double totalSumOfMoney, double RSPN) {
 		this.monthInstallment = (int) monthInstallment;
@@ -37,7 +43,7 @@ public class Output {
 		return formatedNumber;
 	}
 	
-	/***************** GETTERS AND SETTERS *************************/
+	/***************** GETTERS AND SETTERS *****************/
 	public int getMonthInstallment() {
 		return monthInstallment;
 	}
