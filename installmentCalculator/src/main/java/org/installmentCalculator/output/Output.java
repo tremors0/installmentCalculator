@@ -15,7 +15,7 @@ public class Output {
 	
 	private int monthInstallment;
 	private String totalSumOfMoney;
-	private double RSPN;
+	private String rpsn;
 	
 	/**JAX-RS need empty constructor*/
 	public Output() {
@@ -24,9 +24,9 @@ public class Output {
 	
 	
 	/** Constructor */
-	public Output(double monthInstallment, double totalSumOfMoney, double RSPN) {
+	public Output(double monthInstallment, double totalSumOfMoney, double rpsn) {
 		this.monthInstallment = (int) monthInstallment;
-		this.RSPN = RSPN;
+		this.rpsn = formatDouble(rpsn);
 		this.totalSumOfMoney = formatDouble(totalSumOfMoney);
 	}
 	
@@ -64,13 +64,13 @@ public class Output {
 	}
 
 
-	public double getRSPN() {
-		return RSPN;
+	public String getRSPN() {
+		return rpsn;
 	}
 
 
-	public void setRSPN(double rSPN) {
-		RSPN = rSPN;
+	public void setRSPN(String rpsn) {
+		this.rpsn = rpsn;
 	}
 	
 }

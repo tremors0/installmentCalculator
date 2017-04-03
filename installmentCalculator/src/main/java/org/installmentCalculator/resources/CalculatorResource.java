@@ -4,9 +4,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import org.installmentCalculator.logic.InstallmentCalculator;
 import org.installmentCalculator.output.Output;
+
 
 /**
  * Root resource - process request from client and return result
@@ -33,7 +35,7 @@ public class CalculatorResource {
      * @param insuranceString			does user have insurance?
      * @return							month installment, total sum of money user will pay, RSPN as JSON
      */
-    public Output calculate(@PathParam("a") String amountOfMoneyString,
+    public Response calculate(@PathParam("a") String amountOfMoneyString,
         					@PathParam("b") String countOfMonthsString,
         					@PathParam("c") String insuranceString) {
     	
@@ -43,14 +45,12 @@ public class CalculatorResource {
     	
     	double monthInstallment = calculator.calculateMonthInstallment(amountOfMoney, countOfMonths, insurance);
     	double totalSum = calculator.calculateTotalSum(amountOfMoney, countOfMonths, insurance);
-    	double RSPN = 0.0;
+    	double rpsn = calculator.calculateRPSN();
     	
     	/*create output*/
-    	Output output = new Output(monthInstallment, totalSum, RSPN);
+    	Output output = new Output(monthInstallment, totalSum, rpsn);
     	
-    	System.out.println("Mesicni platba: " + output.getMonthInstallment());
-    	System.out.println("Celkova suma: " + output.getTotalSumOfMoney());
     	
-    	return output;
+    	return Response.ok().entity(output).build() ;
     }
 }

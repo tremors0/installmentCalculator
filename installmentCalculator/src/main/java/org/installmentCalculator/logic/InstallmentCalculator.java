@@ -67,6 +67,7 @@ public class InstallmentCalculator {
 		
 		double interestRate =  1.0 + (rate/MONTHS_IN_YEAR);
 		
+		/**Diviser can never be zero*/
 		monthInstallment = amountOfMoney * (Math.pow(interestRate, countOfMonths) * (interestRate - 1)) /
 								 (Math.pow(interestRate, countOfMonths) - 1); 
 	    
@@ -91,5 +92,15 @@ public class InstallmentCalculator {
 															insurance);
 		double totalSum = monthInstallment * countOfMonths;
 		return totalSum;
+	}
+	
+	
+	/**
+	 * Doesn't really count RPSN, just returns a reasonable number 
+	 */
+	public double calculateRPSN() {
+		double randomValue = Math.random() * 5;
+		
+		return rate * 100 + randomValue;
 	}
 }

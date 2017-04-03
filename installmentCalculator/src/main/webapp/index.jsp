@@ -4,8 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="cs">
 
 <head>
-	<title>Splatkova kalkulacka</title>
+	<title>Splátková kalkulačka</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans" type='text/css'>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -25,7 +26,7 @@
 		    	<p class = "limits"> 20 000 Kč <span class = "max_limit"> 800 000 Kč</span></p>
 	    	</div>
 	    	<div class = inputTextWrapper>
-		    	<input type = "text" class = "inputText amountOfMoneyInput" name = "amountOfMoney">
+		    	<input type = "text" class = "inputText amountOfMoneyInput" name = "amountOfMoney" autocomplete="off">
 		    	<span class = "bold moveDown"> Kč </span>
 	    	</div>
 	    	
@@ -36,7 +37,7 @@
 		    	<p class = "limits"> 24 měsíců <span class = "max_limit"> 96 měsíců</span></p>
 	    	</div>
 	    	<div class = inputTextWrapper>
-	    		<input type = "text" class = "inputText instalmentTimeInput" name = "instalmentTime">
+	    		<input type = "text" class = "inputText instalmentTimeInput" name = "instalmentTime" autocomplete="off">
 	    		<span class = "bold moveDown"> měsíců </span>
 	    		<p id = monthsToYears><p>
 	    	</div>
@@ -49,9 +50,9 @@
 	      		<label for = "radioInput2"> Bez pojištění</label>
 	    	
 	    	<div id = "moreInformation">
-		    	<p>Úroková sazba od <span class = "bold"> XXX % </span>, RSPN od <span class = "bold"> XXX % </span>, 
-		    		pojištění <span class = "bold"> XXX Kč/měsíčně </span>, poplatek za sjednání 
-		    		online <span class = "bold"> 0 Kč</span>, celkem zaplatíte <span class = "bold"> XXX Kč </span></p>
+		    	<p>Úroková sazba od <span class = "bold"> 6.9 % </span>, RSPN od <span class = "bold" id = "rpsn"> XXX % </span>, 
+		    		pojištění <span class = "bold"> 200 Kč/měsíčně </span>, poplatek za sjednání 
+		    		online <span class = "bold"> 0 Kč</span>, celkem zaplatíte <span class = "bold" id = "totalSum"> XXX Kč </span></p>
 		    	
 		    	<p> Výše uvedené splátky je pouze orientační a od výsledné schválené výše splátky se může lišit.</p>
 	    	</div>

@@ -35,6 +35,10 @@ h3 {
 	top: 5px;
 }
 
+.ui-slider-horizontal .ui-state-default {
+	cursor: pointer !important;
+}
+
 
 .wrapper {
 	max-width: 1150px;;
@@ -170,10 +174,15 @@ input[type=radio]:checked + label:before {
 
 
 #monthPayment {
-	font-size: 50px;
+	font-size: 60px;
 	color: white;
+	font-family: "Open Sans", "Arial", sans-serif;
 }
 
+#totalSum {
+	display: inline-block;
+	float: left;
+}
 
 #continue {
 	background-color: #3FB360;
@@ -200,7 +209,7 @@ input[type=radio]:checked + label:before {
 	height: 20px;
 	background-image: url("images/phone.png");
 	background-repeat: no-repeat;
-	width: 165px;
+	width: 155px;
 	background-position: left center;
 	margin: 20px auto;
 	text-align: right;

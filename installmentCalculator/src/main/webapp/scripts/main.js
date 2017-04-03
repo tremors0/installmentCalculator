@@ -19,6 +19,9 @@ $(function() {
    	    	// set default design for input text
    	    	var amount = document.getElementsByClassName("amountOfMoneyInput");
    	    	amount[0].style.border="1px solid #c5c5c5";
+   	    },
+   	    stop: function (event, ui) {
+   	    	createRequest();
    	    }
 	});
 });
@@ -41,7 +44,10 @@ $(function() {
 			var amount = document.getElementsByClassName("instalmentTimeInput");
    	    	amount[0].style.border="1px solid #c5c5c5";
    	    	monthsToYearAndMonths(ui.value);
-		}
+		},
+		stop: function (event, ui) {
+   	    	createRequest();
+   	    }
 	});
 });
 
@@ -77,6 +83,7 @@ $(function() {
 			var amount = document.getElementsByClassName("amountOfMoneyInput");
 			amount[0].style.border="1px solid #c5c5c5";
 			$(".amountOfMoney").slider( "option", "value", inputValue );
+			createRequest();
 			$(this).val(formatNumber(inputValue));
 		}	
 	});
@@ -114,11 +121,74 @@ $(function() {
 			var amount = document.getElementsByClassName("instalmentTimeInput");
 			amount[0].style.border="1px solid #c5c5c5";
 			$(".instalmentTime").slider( "option", "value", inputValue );
+			createRequest();
 			$(this).val(inputValue);
 		}	
 	});
 });
-       
+      
+
+$(function(){
+	$("#radioInput1").click(function(){
+		if ($(this).is(':checked')) {
+			createRequest();
+		}
+	});
+});
+
+
+$(function(){
+	$("#radioInput2").click(function(){
+		if ($(this).is(':checked')) {
+			createRequest();
+		}
+	});
+});
+
+
+function createRequest () {
+	var uriString = "/installmentCalculator/webapi/";
+	
+	var amountOfMoney = deleteWhitespaces($(".amountOfMoneyInput").val());
+	
+	if (amountOfMoney) {
+		uriString +=  amountOfMoney + "/";
+	} else {
+		return;
+	}
+	
+	var instalmentTime = $(".instalmentTimeInput").val();
+	
+	if (instalmentTime) {
+		uriString += instalmentTime + "/";
+	} else {
+		return;
+	}
+	
+	if ($("#radioInput2").is(':checked')) {
+		uriString += "false";
+	} else {
+		uriString += "true";
+	}
+	
+	sendRequest(uriString);
+	console.log("URI: " + uriString);
+}
+
+
+function sendRequest(uriString) {
+	$.getJSON(uriString, function(jd) {
+		$("#monthPayment").text(formatNumber(jd.monthInstallment) + " Kč");
+		$("#rpsn").text(jd.RSPN);
+		$("#totalSum").text(jd.totalSumOfMoney + " Kč");
+	});
+}
+
+
+function deleteWhitespaces(originValue) {
+	return originValue.replace(/\s+/g, '');
+}
+
 
 /**
  * Formats number: 20000 -> 20 000 etc
