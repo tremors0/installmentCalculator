@@ -6,7 +6,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import logic.InstallmentCalculator;
+import org.installmentCalculator.logic.InstallmentCalculator;
+import org.installmentCalculator.output.Output;
 
 /**
  * Root resource 
@@ -14,7 +15,7 @@ import logic.InstallmentCalculator;
 @Path("/")
 public class CalculatorResource {
 
-	InstallmentCalculator calculater = new InstallmentCalculator();
+	InstallmentCalculator calculator = new InstallmentCalculator();
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -24,20 +25,23 @@ public class CalculatorResource {
     
     @GET
     @Path("installment/{a}/{b}/{c}")
-    public String calculate(
-            @PathParam("a") String amountOfMoneyString,
-            @PathParam("b") String countOfMonthsString,
-            @PathParam("c") String insuranceString) {
+    public String calculate(@PathParam("a") String amountOfMoneyString,
+        					@PathParam("b") String countOfMonthsString,
+        					@PathParam("c") String insuranceString) {
     	
     	int amountOfMoney = Integer.parseInt(amountOfMoneyString);
     	int countOfMonths = Integer.parseInt(countOfMonthsString);
     	
-    	double monthInstallment = calculater.calculateMonthInstallment(amountOfMoney, countOfMonths);
-    	System.out.println("Mesicni splatka: " + monthInstallment);
+    	double monthInstallment = calculator.calculateMonthInstallment(amountOfMoney, countOfMonths);
+    	double totalSum = calculator.calculateTotalSum(amountOfMoney, countOfMonths);
+    	double RSPN = 0.0;
     	
-    	double totalSum = calculater.calculateTotalSum(amountOfMoney, countOfMonths);
-    	System.out.println("Celkova suma: " + totalSum);
+    	/*create output*/
+    	Output output = new Output(monthInstallment, totalSum, RSPN);
     	
-    	return amountOfMoney + ", " + countOfMonths + ", " + insuranceString;
+    	System.out.println("Mesicni platba: " + output.getMonthInstallment());
+    	System.out.println("Celkova suma: " + output.getTotalSumOfMoney());
+    	
+    	return output.getMonthInstallment() + ", " + output.getTotalSumOfMoney()  + ", " + insuranceString;
     }
 }
